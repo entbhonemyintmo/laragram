@@ -14,14 +14,14 @@
                 >
         </div>
         <div class="col-8 py-5">
-          <div class="mb-3" ><h3>entbhonemm</h3></div>
+          <div class="mb-3" ><h3>{{$user->username}}</h3></div>
           <div class="d-flex gap-5 mb-3">
             <div><strong>153</strong>posts</div>
             <div><strong>21k</strong>followers</div>
             <div><strong>212</strong>following</div>
           </div>
-          <h1 class="" >Ent Bhone Myint mo</h1>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident similique repellendus, eveniet qui adipisci optio dolorem molestiae non ab quos aut nam ea. Aliquid, ut. Illo odio architecto beatae saepe?</p>
+          <h1 class="" >{{$user->name}}</h1>
+          <p>{{$user->profile->description ?? 'N/A'}}</p>
 
         </div>
     </div>
