@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class PostsController extends Controller
 {
+
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
   public function create()
   {
     return view('posts.create');
@@ -19,11 +27,20 @@ class PostsController extends Controller
     ]);
 
     $mediaPath = request('media')->store('uploads', 'public');
+    $image = Image::make(public_path("storage/{$mediaPath}"))->fit(1200, 1200);
+    $image->save();
+
     auth()->user()->posts()->create([
       'caption' => $data['caption'],
-      'media' => $mediaPath
+      'media' => $mediaPath,
     ]);
 
     return redirect('/profile/' . auth()->user()->id);
   }
+
+  public function show(Post $post)
+  {
+    return view('posts.show', compact('post'));
+  }
+
 }
