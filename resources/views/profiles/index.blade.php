@@ -12,23 +12,24 @@
             </div>
             <div class="col-8 py-5">
                 <div
-                     class="mb-3 d-flex justify-content-between">
-                    <h3>{{ $user->username }}
-                    </h3>
+                     class="d-flex justify-content-between">
+                      <h3>{{ $user->username }}
+                      </h3>
                     <a href="/p/create"
                        class="btn btn-primary">Add
                         Post</a>
                 </div>
+                <a href="/profile/{{auth()->user()->id}}/edit">Edit profile</a>
                 <div
-                     class="d-flex gap-5 mb-3">
+                     class="d-flex gap-5 my-3">
                     <div>
-                        <strong>153</strong>posts
+                        <strong>{{$user->posts->count()}}</strong>&nbsp;posts
                     </div>
                     <div>
-                        <strong>21k</strong>followers
+                        <strong>21k</strong>&nbsp;followers
                     </div>
                     <div>
-                        <strong>212</strong>following
+                        <strong>212</strong>&nbsp;following
                     </div>
                 </div>
                 <h1 class="">
@@ -36,6 +37,7 @@
                 </h1>
                 <p>{{ $user->profile->description ?? 'N/A' }}
                 </p>
+                <a href="{{$user->profile->url}}" target="_blank">{{$user->profile->url}}</a>
 
             </div>
         </div>
