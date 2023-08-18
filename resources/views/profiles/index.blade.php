@@ -13,17 +13,25 @@
             <div class="col-8 py-5">
                 <div
                      class="d-flex justify-content-between">
-                      <h3>{{ $user->username }}
-                      </h3>
-                    <a href="/p/create"
-                       class="btn btn-primary">Add
-                        Post</a>
+                    <h3>{{ $user->username }}
+                    </h3>
+                    @can('update',
+                        $user->profile)
+                        <a href="/p/create"
+                           class="btn btn-primary">Add
+                            Post</a>
+                    @endcan
                 </div>
-                <a href="/profile/{{auth()->user()->id}}/edit">Edit profile</a>
+                @can('update',
+                    $user->profile)
+                    <a
+                       href="/profile/{{ auth()->user()->id }}/edit">Edit
+                        profile</a>
+                @endcan
                 <div
                      class="d-flex gap-5 my-3">
                     <div>
-                        <strong>{{$user->posts->count()}}</strong>&nbsp;posts
+                        <strong>{{ $user->posts->count() }}</strong>&nbsp;posts
                     </div>
                     <div>
                         <strong>21k</strong>&nbsp;followers
@@ -37,7 +45,8 @@
                 </h1>
                 <p>{{ $user->profile->description ?? 'N/A' }}
                 </p>
-                <a href="{{$user->profile->url}}" target="_blank">{{$user->profile->url}}</a>
+                <a href="{{ $user->profile->url }}"
+                   target="_blank">{{ $user->profile->url }}</a>
 
             </div>
         </div>
@@ -45,11 +54,12 @@
 
             @foreach ($user->posts as $post)
                 <div class="col-4 pb-4">
-                   <a href="/p/{{$post->id}}">
-                    <img src="/storage/{{ $post->media }}"
-                    alt=""
-                    class="w-100">
-                   </a>
+                    <a
+                       href="/p/{{ $post->id }}">
+                        <img src="/storage/{{ $post->media }}"
+                             alt=""
+                             class="w-100">
+                    </a>
                 </div>
             @endforeach
 
