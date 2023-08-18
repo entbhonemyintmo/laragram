@@ -11,7 +11,7 @@
 
                     <div class="card-body">
                         <form method="POST"
-                              action="/profile/{{$user->id}}">
+                              action="/profile/{{$user->id}}" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
 
@@ -92,7 +92,7 @@
                             <div
                                  class="row mb-3">
                                 <label
-                                       for="mdeia"
+                                       for="media"
                                        class="col-md-4 col-form-label text-md-end">Profile</label>
 
                                 <div

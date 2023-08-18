@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-4"
                  style="place-items: center; display: grid;">
-                <img src="/formalPP.jpg"
+                <img src="/storage/{{$user->profile->media ?? 'default_profile.png'}}"
                      alt="profile-pic"
                      class="rounded-circle"
                      style="width: 12rem;">

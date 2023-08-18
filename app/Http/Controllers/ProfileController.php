@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ProfileController extends Controller
 {
@@ -26,12 +27,21 @@ class ProfileController extends Controller
       'title' => ['string', 'required'],
       'description' => ['string', 'required'],
       'url' => ['url', 'nullable'],
-      // 'media' => ['image', 'nullable']
+      'media' => ['image', 'nullable']
     ]);
 
-    auth()->user()->profile->update($data);
+    if (request('media')) {
+      $mediaPath = request('media')->store('profiles', 'public');
+      $image = Image::make(public_path("storage/{$mediaPath}"))->fit(1200, 1200);
+      $image->save();
+
+      $imageArray = ['media' => $mediaPath];
+    }
+
+    auth()->user()->profile->update(array_merge(
+      $data,
+      $imageArray ?? []
+    ));
     return redirect("/profile/{$user->id}");
   }
-
-
 }

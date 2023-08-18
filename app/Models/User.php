@@ -44,6 +44,17 @@ class User extends Authenticatable
     'password' => 'hashed',
   ];
 
+  protected static function boot()
+  {
+    parent::boot();
+    static::created(function ($user) {
+      $user->profile()->create([
+        'title' => $user->name,
+        'media' => 'default_profile.png'
+      ]);
+    });
+  }
+
   public function profile()
   {
    return $this->hasOne(Profile::class);
