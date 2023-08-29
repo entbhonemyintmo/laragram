@@ -13,8 +13,12 @@
             <div class="col-8 py-5">
                 <div
                      class="d-flex justify-content-between">
-                    <h3>{{ $user->username }}
+                    <h3>{{ $user->username}}
                     </h3>
+
+                    @can('view', $user->profile)
+                    <follow-btn :user-id="{{ $user->id }}" :follows="{{ $follows ? 'true' : 'false' }}"></follow-btn>
+                    @endcan
                     @can('update',
                         $user->profile)
                         <a href="/p/create"
@@ -34,10 +38,10 @@
                         <strong>{{ $user->posts->count() }}</strong>&nbsp;posts
                     </div>
                     <div>
-                        <strong>21k</strong>&nbsp;followers
+                        <strong>{{$user->profile->follwers->count()}}</strong>&nbsp;followers
                     </div>
                     <div>
-                        <strong>212</strong>&nbsp;following
+                        <strong>{{$user->following->count()}}</strong>&nbsp;following
                     </div>
                 </div>
                 <h1 class="">
