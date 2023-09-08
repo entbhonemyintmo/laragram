@@ -35,13 +35,13 @@
                 <div
                      class="d-flex gap-5 my-3">
                     <div>
-                        <strong>{{ $user->posts->count() }}</strong>&nbsp;posts
+                        <strong>{{ $postsCount }}</strong>&nbsp;posts
                     </div>
                     <div>
-                        <strong>{{$user->profile->follwers->count()}}</strong>&nbsp;followers
+                        <strong>{{$followersCount}}</strong>&nbsp;followers
                     </div>
                     <div>
-                        <strong>{{$user->following->count()}}</strong>&nbsp;following
+                        <strong>{{$followingCount}}</strong>&nbsp;following
                     </div>
                 </div>
                 <h1 class="">
